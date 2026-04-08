@@ -75,15 +75,45 @@ Status data_set_message(InterfaceData *data, char *m);
 Status data_set_last_command(InterfaceData *data, Command *c);
 
 
-
+/**
+* @brief Crea un juego
+* @author MAR
+* @return Puntero a Game con todos sus campos inicializados 
+*/
 Game* game_create();
 
+/**
+* @brief Libera toda la memoria del juego
+* @author MAR
+* @param game Puntero al juego
+* @return Ok o ERROR 
+*/
 Status game_destroy(Game *game);
 
+/**
+* @brief Consigue el espacio del juego
+* @author MAT
+* @param game Puntero al juego
+* @param id Identificador del espacio
+* @return Puntero a Space con el espacio conseguido  
+*/
 Space *game_get_space(Game *game, Id id);
 
+/**
+* @brief Consigue el id del espacio en el que esta el jugador
+* @author MAT 
+* @param game Puntero al juego 
+* @return Identificador del espacio del jugador 
+*/
 Id game_get_player_location(Game *game);
 
+/**
+* @brief Actualiza la localizacion del jugador en el juego
+* @author MAR
+* @param game Puntero al juego
+* @param id Identificador del espacio del jugador
+* @return Ok o ERROR 
+*/
 Status game_set_player_location(Game *game, Id id);
 
 Command* game_get_last_command(Game *game);
