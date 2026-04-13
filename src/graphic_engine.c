@@ -32,6 +32,7 @@ struct _Graphic_engine
 Graphic_engine *graphic_engine_create()
 {
   static Graphic_engine *ge = NULL;
+  
   if (ge)
     return ge;
   screen_init(HEIGHT_MAP + HEIGHT_BAN + HEIGHT_HLP + HEIGHT_FDB + 4, WIDTH_MAP + WIDTH_DES + 3);
@@ -252,7 +253,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
       screen_area_puts(ge->map, str);
     }
   }
-  
+
   screen_area_clear(ge->descript);
 
   screen_area_puts(ge->descript, "   Objects:");
