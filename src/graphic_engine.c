@@ -252,6 +252,7 @@ void graphic_engine_paint_game(Graphic_engine *ge, Game *game)
       screen_area_puts(ge->map, str);
     }
   }
+  
   screen_area_clear(ge->descript);
 
   screen_area_puts(ge->descript, "   Objects:");
