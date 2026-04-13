@@ -9,7 +9,6 @@ struct _Object {
   char desc[40];
 };
 
-
 Object* object_create(Id id) {
   Object* newObject = NULL;
 
