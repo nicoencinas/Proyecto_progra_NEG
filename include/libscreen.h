@@ -14,8 +14,6 @@
 typedef struct _Area Area;
 typedef enum {BLUE, GREEN, BLACK, RED, YELLOW, PURPLE, CYAN, WHITE} Frame_color;
 
-
-
 /**
  * @brief It creates a new screen
  * @author Profesores PPROG
