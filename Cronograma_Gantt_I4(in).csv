@@ -1,0 +1,27 @@
+Tarea;;;;;ROB;MAR;NICO;JOEL;MAT;Semana 1;Semana 2;Semana 3;Semana 4
+G1/G2 Planificacion y Actas;;;;;;;;;;MAR;;;
+C1-C4 Makefile y Estructura;;;;;;;;;;NICO;;;
+D1-D3 Documentacion Doxygen/Estilo;;;;;;;;;;;MAR;MAR;MAR
+F1/F2/F3 Personajes Following/Recruit;;;;;;;;;;MAR/MAT;;;
+F6 Direcciones (Up/Down);;;;;;;;;;NICO/JOEL;;;
+F7 Propiedades Objetos (health/movable...);;;;;;;;;;NICO/JOEL/ROBERT;;;
+F15 GameManagement (Inicio);;;;;;;;;;MAR/MAT;;;
+F4/F5 Ataque followers y TAD Set en Space;;;;;;;;;;;JOEL/MAT;;
+F8/F10 Uso de objetos (Use/Health);;;;;;;;;;;MAR/MAT;;
+F11 Abrir enlaces con objetos;;;;;;;;;;;MAR/MAT;;
+P2 Script de Bash (Tests/Valgrind);;;;;;;;;;;/ROB;;
+F17 GameRules (6 reglas min);;;;;;;;;;;;TODOS;
+    *F15/F16 Save/Load (Ficheros);;;;;;;;;;;;TODOS;
+F9 Carga de datos (GameReader);;;;;;;;;;;;MAR;
+F19 Mejoras Multijugador;;;;;;;;;;;;JOEL;
+    *F13/F14 Contenido Aventura y Manual del jugador;;;;;;;;;;;;NICO/MAT/ROB;
+F18 Modo Determinista (-d);;;;;;;;;;;;;MAT
+F12 Visualizacion y Polish;;;;;;;;;;;;;NICO/MAT
+F20 Cooperacion equipos;;;;;;;;;;;;;YOEL
+F21 Log con ID de Jugador;;;;;;;;;;;;;MAR
+    *P1/P3 Pruebas Unitarias e Integracion;;;;;;;;;;;;;TODOS
+E1/E2 Concurso y Presentacion;;;;;;;;;;;;;TODOS
+;;;;;;;;;;;;;
+PARTE CREATIVA:( se ira añadiaendo conforme surgan ideas);;;;;;;;;;TODOS;TODOS;TODOS;TODOS
+
+Modulo use y gestion de obj: MAR

@@ -1,0 +1,431 @@
+/**
+ * @brief It defines the game interface
+ *
+ * @file game.h
+ * @author Profesores, M.A, M.C, JOEL
+ * @version 1
+ * @date 27-04-2026
+ * @copyright GNU Public License
+ */
+
+#ifndef GAME_H
+#define GAME_H
+
+#include "command.h"
+#include "space.h"
+#include "types.h"
+#include "player.h"
+#include "object.h"
+#include "character.h"
+#include "link.h"
+
+#define MAX_SPACES 100
+
+typedef struct _InterfaceData InterfaceData;
+typedef struct _Game Game;
+
+/**
+ * @brief Crea una nueva interfaz de datos, reservando memoria e inicializando sus miembros
+ * @author NICO
+ *
+ * @return Puntero al nuevo personaje o NULL en caso de error
+ */
+InterfaceData *data_create();
+
+/**
+ * @brief Destruye una interfaz de datos y libera la memoria asociada
+ * @author JOEL
+ * @param data Puntero a la interfaz de datos a destruir
+ * @return OK si se libera con éxito, ERROR en caso contrario
+ */
+Status data_destroy(InterfaceData *data);
+
+/**
+ * @brief Obtiene el último command
+ * @author MAR
+ * @param data Puntero a data
+ * @return Número de personajes
+ */
+Command *data_get_last_command(InterfaceData *data);
+
+/**
+ * @brief Obtiene el msg
+ * @author MAR
+ * @param data Puntero a data
+ * @return Número de personajes
+ */
+char *data_get_message(InterfaceData *data);
+
+/**
+ * @brief  Establece la cadena de texto para el sistema de chat/mensajes
+ * @author MAR
+ * @param data Puntero a data
+ * @param m     mensaje
+ * @return Número de personajes
+ */
+Status data_set_message(InterfaceData *data, char *m);
+
+/**
+ * @brief  Establece el último command
+ * @author MAR
+ * @param data Puntero a data
+ * @param c Puntero command
+ * @return Número de personajes
+ */
+Status data_set_last_command(InterfaceData *data, Command *c);
+
+Game *game_create();
+
+Status game_destroy(Game *game);
+
+Space *game_get_space(Game *game, Id id);
+
+Character *game_get_character(Game *game, Id id);
+
+Id game_get_player_location(Game *game);
+
+Status game_set_player_location(Game *game, Id id);
+
+Command *game_get_last_command(Game *game);
+
+Status game_set_last_command(Game *game, Command *command);
+
+Bool game_get_finished(Game *game);
+
+Status game_set_finished(Game *game, Bool finished);
+
+void game_print(Game *game);
+
+/**
+ * @brief Carga los espacios desde un archivo de datos
+ * @author MAR
+ * @param game Puntero al juego
+ * @param filename Nombre del archivo de datos
+ * @return OK si se carga con éxito, ERROR en caso contrario
+ */
+Status game_load_spaces(Game *game, char *filename);
+
+/**
+ * @brief Añade un nuevo espacio al juego
+ * @author MAR
+ * @param game Puntero al juego
+ * @param space Puntero al espacio a añadir
+ * @return OK o ERROR
+ */
+Status game_add_space(Game *game, Space *space);
+
+/**
+ * @brief Obtiene el ID de un espacio en una posición determinada del array
+ * @author MAR
+ * @param game Puntero al juego
+ * @param position Índice del espacio en el array
+ * @return El ID del espacio o NO_ID si hay error
+ */
+Id game_get_space_id_at(Game *game, int position);
+
+/**
+ * @brief Obtiene la localización de un objeto específico
+ * @author MAR
+ * @param game Puntero al juego
+ * @param object_id ID del objeto
+ * @return El ID del espacio donde está el objeto, WITH_PLAYER si lo lleva el jugador o NO_ID
+ */
+Id game_get_object_location(Game *game, Id object_id);
+
+/**
+ * @brief Cambia la localización de un objeto
+ * @author MAR
+ * @param game Puntero al juego
+ * @param space_id ID del nuevo espacio (o WITH_PLAYER)
+ * @param object_id ID del objeto a mover
+ * @return OK o ERROR
+ */
+Status game_set_object_location(Game *game, Id space_id, Id object_id);
+
+/**
+ * @brief Obtiene los puntos de vida actuales del jugador
+ * @author MAT
+ * @param game Puntero al juego
+ * @return Puntos de vida del jugador
+ */
+int game_get_player_HP(Game *game);
+
+/**
+ * @brief Añade un objeto al catálogo global del juego
+ * @author MAR
+ * @param game Puntero al juego
+ * @param object Puntero al objeto a añadir
+ * @return OK o ERROR
+ */
+Status game_add_object(Game *game, Object *object);
+
+/**
+ * @brief Obtiene el puntero a la estructura del jugador
+ * @author Profesores PPROG
+ * @param game Puntero al juego
+ * @return Puntero al jugador
+ */
+Player *game_get_player(Game *game);
+
+/**
+ * @brief Busca un objeto en el catálogo global mediante su ID
+ * @author MAR
+ * @param game Puntero al juego
+ * @param id ID del objeto a buscar
+ * @return Puntero al objeto encontrado o NULL si no existe
+ */
+Object *game_get_object_from_id(Game *game, Id id);
+
+/**
+ * @brief Busca un jugador en el array de jugadores
+ * @author NICO
+ * @param game Puntero al juego
+ * @param id Identificador del jugador que estoy buscando
+ * @return Puntero al jugador que busco
+ */
+Player *game_get_player_from_id(Game *game, Id id);
+
+/**
+ * @brief Añade un personaje al juego
+ * @author MAT
+ * @param game Puntero al juego
+ * @param character Puntero al personaje a añadir
+ * @return OK o ERROR
+ */
+Status game_add_character(Game *game, Character *character);
+
+/**
+ * @brief Obtiene un personaje situado en una posición específica del array
+ * @author MAT
+ * @param game Puntero al juego
+ * @param position Índice del personaje
+ * @return Puntero al personaje o NULL en caso de error
+ */
+Character *game_get_character_at(Game *game, int position);
+
+/**
+ * @brief Obtiene el número total de personajes en el juego
+ * @author MAT
+ * @param game Puntero al juego
+ * @return Número de personajes
+ */
+int game_get_n_characters(Game *game);
+
+/**
+ * @brief Obtiene la cadena de texto del último mensaje de chat
+ * @author MAT
+ * @param game Puntero al juego
+ * @return Puntero a la cadena de texto (s) almacenada en el juego
+ */
+char *game_get_s(Game *game);
+
+/**
+ * @brief Establece la cadena de texto para el sistema de chat/mensajes
+ * @author MAT
+ * @param game Puntero al juego
+ * @param s Cadena de texto con el mensaje
+ * @return OK o ERROR
+ */
+Status game_set_s(Game *game, char *s);
+
+/**
+ * @brief Obtiene el identificador del espacio de destino
+ * @author JOEL
+ * @param game Puntero al juego
+ * @param space_id Identificador del espacio actual
+ * @param direction Direccion del enlace
+ * @return El identificador del espacio de destino
+ */
+Id game_get_connection(Game *game, Id space_id, Direction direction);
+
+/**
+ * @brief Determina si la conexion entre dos espacios es posible o si no
+ * @author NICO
+ * @param game Puntero al juego
+ * @param space_id Identificador del espacio actual
+ * @param direction Direccion del enlace
+ * @return Si la conexion es abierta o cerrada
+ */
+Bool game_connection_is_open(Game *game, Id actual, Direction direction);
+
+/**
+ * @brief Añade un enlace al juego
+ * @author JOEL
+ * @param game Puntero al juego
+ * @param link Puntero al enlace a añadir
+ * @return OK o ERROR
+ */
+Status game_add_link(Game *game, Link *link);
+
+/**
+ * @brief Obtiene el número total de objetos en el juego
+ * @author MAR
+ * @param game Puntero al juego
+ * @return Número de personajes
+ */
+int game_get_n_obj(Game *game);
+
+/**
+ * @brief  devuelve el turno actual
+ * @author MAR
+ * @param game Puntero a game
+ * @return turno actual
+ */
+int game_get_turn(Game *game);
+/**
+ * @brief  incrementa el turno
+ * @author MAR
+ * @param game Puntero a game
+ * @return Status
+ */
+Status game_next_turn(Game *game);
+
+/**
+ * @brief Consigue el numero de jugadores del juego
+ * @author NICO
+ *
+ * @param game Puntero al juego
+ * @return Numero de jugadores
+ */
+int game_get_n_players(Game *game);
+
+/**
+ * @brief Añade un jugador al juego
+ * @author NICO
+ *
+ * @param game Puntero al juego
+ * @param player Puntero con el jugador que se va a añadir
+ * @return OK o ERROR
+ */
+Status game_add_player(Game *game, Player *player);
+
+/**
+ * @brief Devuelve el enlace almacenado en una posición específica del array.
+ * @author MAR
+ * * @param game Puntero a la estructura de juego.
+ * @param index Índice del enlace (de 0 a MAX_LINKS-1).
+ * @return Link* Puntero al enlace o NULL si el índice es inválido o no hay enlace.
+ */
+Link *game_get_link_at(Game *game, int index);
+
+/**
+ * @brief Devuelve el objeto en una posición determinada del array
+ * @author MAR
+ */
+Object *game_get_object_at(Game *game, int position);
+
+/**
+ * @brief Retorna el estado del flag de evento
+ * @author MAR
+ */
+Bool game_get_event(Game *game);
+
+/**
+ * @brief Cambia el estado del flag de evento
+ * @author MAR
+ */
+Status game_set_event(Game *game, Bool status);
+
+/**
+ * @brief Obtiene el mensaje de los eventos
+ * @author MAR
+ * @param game Puntero al juego
+ * @return Mensaje del evento
+ */
+char *game_get_e(Game *game);
+
+/**
+ * @brief Actualiza el mensaje de los eventos
+ * @author MAR
+ * @param game Puntero al juego
+ * @param message Puntero con el mensaje del evento
+ * @return OK o ERROR
+ */
+Status game_set_e(Game *game, char *message);
+
+/**
+ * @brief Consigue el numero de espacios del juego
+ * @author JOEL
+ *
+ * @param game Puntero al juego
+ * @return Numero de espacios
+ */
+int game_get_n_spaces(Game *game);
+
+/**
+ * @brief Devuelve el espacio en una posición determinada del array
+ * @author JOEL
+ */
+Space *game_get_space_at(Game *game, int index);
+
+/**
+ * @brief Consigue el numero de links del juego
+ * @author JOEL
+ *
+ * @param game Puntero al juego
+ * @return Numero de links
+ */
+int game_get_n_links(Game *game);
+
+/**
+ * @brief Consigue el numero de objetos del juego
+ * @author JOEL
+ *
+ * @param game Puntero al juego
+ * @return Numero de objetos
+ */
+int game_get_n_objects(Game *game);
+
+/**
+ * @brief Devuelve el jugador en una posición determinada del array
+ * @author JOEL
+ * @param game Puntero al juego
+ * @param index posicion determinada
+ * @return Puntero al jugador en la posicion que quiero
+ */
+Player *game_get_player_at(Game *game, int index);
+
+/**
+ * @brief Obtiene el modo determinista del juego
+ * @author MAT
+ * @param game Puntero al juego
+ * @return TRUE o FALSE
+ */
+Bool game_get_det(Game *game);
+
+/**
+ * @brief Actualiza el modo determinista
+ * @author MAT
+ * @param game Puntero al juego
+ * @param d Modo determinista
+ * @return OK o ERROR
+ */
+Status game_set_det(Game *game, Bool d);
+
+/**
+ * @brief Actualiza si el juego es multijugador o no
+ * @author NICO
+ * @param game Puntero al juego
+ * @param multi Info de si es multijugador o no
+ * @return Ok o ERROR
+ */
+Status game_set_multiplayer(Game *game, Bool multi);
+
+/**
+ * @brief Obtiene el estado de multijugador
+ * @author NICO
+ * @param game Puntero al juego
+ * @return TRUE o FALSE
+ */
+Bool game_get_multiplayer(Game *game);
+
+/**
+ * @brief Actializa el numero de jugadores del juego
+ * @author JOEL
+ * @param game Puntero al juego
+ * @param n_players Numero de jugadores del juego
+ * @return OK o ERROR
+ */
+Status game_set_n_players(Game *game, int n_players);
+
+#endif
